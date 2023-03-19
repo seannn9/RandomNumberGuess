@@ -8,7 +8,6 @@ window.title("RNG ")
 window.resizable(False, False)
 
 score = 0
-f = open("C:\\Users\\naesk\\Downloads\\history.txt", "a")
 
 def reset_button():
     score = 0
@@ -22,8 +21,15 @@ def scoring_system():
     l3.config(text=f"Tries: {score}", fg="dark red")
 
 def game_start():
+    if score == 0:
+        if os.path.exists("C:\\Users\\naesk\\Downloads\\temp_history.txt"):
+            os.remove("C:\\Users\\naesk\\Downloads\\temp_history.txt")
+        else:
+            print("File not found")
     scoring_system()
     num = int(e1.get())
+    f = open("C:\\Users\\naesk\\Downloads\\temp_history.txt", "a")
+    f.write(f"Try {score}: {num}\n")
     for i in range(1, 100):
         if num < to_guess:
             e1.delete(0, END)
@@ -38,7 +44,10 @@ def game_start():
             break
 
 def show_history():
-    f.write(f"{e1.get()}")
+    history = Tk()
+    history.title("Guess History")
+    history.geometry("300x300")
+    history.resizable(False, False)
 
 game_title_font = ("Comic Sans MS",  15 , "bold")
 game_title = Label(window, text="Random Number Guessing", font=game_title_font, fg="dark orange")
