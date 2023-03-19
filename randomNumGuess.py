@@ -44,16 +44,27 @@ def game_start():
             break
 
 def show_history():
+    i = 0
     history = Tk()
     history.title("Guess History")
     history.geometry("300x300")
     history.resizable(False, False)
+    f = open("C:\\Users\\naesk\\Downloads\\temp_history.txt", "r")
+    label = Label(history, text="Guess History")
+    label.pack()
+    listbox = Listbox(history)
+    for word in f:
+        i+=1
+        listbox.insert(i, word)
+    listbox.pack()
+
+
 
 game_title_font = ("Comic Sans MS",  15 , "bold")
 game_title = Label(window, text="Random Number Guessing", font=game_title_font, fg="dark orange")
 game_title.pack()
 
-l1 = Label(window, text="", font=game_title_font, bg="white", width=15, borderwidth=2, relief="solid")
+l1 = Label(window, text="", font=game_title_font, bg="light grey", width=15, borderwidth=2, relief="solid")
 l1.pack(padx=10, pady=20)
 
 l2 = Label(window, text="Enter a number between 1 and 1,000:", font="Roboto 12")
