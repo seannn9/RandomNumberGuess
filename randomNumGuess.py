@@ -10,6 +10,8 @@ window.resizable(False, False)
 score = 0
 
 def reset_button():
+    os.remove("C:\\Users\\naesk\\Downloads\\temp_history.txt")
+    global score
     score = 0
     l3.config(text=f"Tries: {score}", fg="dark red")
     l1.config(text="")
@@ -21,6 +23,7 @@ def scoring_system():
     l3.config(text=f"Tries: {score}", fg="dark red")
 
 def game_start():
+    global score
     if score == 0:
         if os.path.exists("C:\\Users\\naesk\\Downloads\\temp_history.txt"):
             os.remove("C:\\Users\\naesk\\Downloads\\temp_history.txt")
