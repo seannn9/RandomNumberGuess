@@ -8,10 +8,10 @@ window.title("RNG ")
 window.resizable(False, False)
 
 score = 0
-download_dir = os.path.join(os.path.expanduser("~"), "Downloads")
+docu_dir = os.path.join(os.path.expanduser("~"), "Documents")
 
 def reset_button():
-    os.remove(download_dir+"/temp_history.txt")
+    os.remove(docu_dir+"/temp_history.txt")
     global score
     score = 0
     l3.config(text=f"Tries: {score}", fg="dark red")
@@ -26,13 +26,13 @@ def scoring_system():
 def game_start():
     global score
     if score == 0:
-        if os.path.exists(download_dir+"/temp_history.txt"):
-            os.remove(download_dir+"/temp_history.txt")
+        if os.path.exists(docu_dir+"/temp_history.txt"):
+            os.remove(docu_dir+"/temp_history.txt")
         else:
             print("File not found")
     scoring_system()
     num = int(e1.get())
-    f = open(download_dir+"/temp_history.txt", "a")
+    f = open(docu_dir+"/temp_history.txt", "a")
     f.write(f"Try {score}: {num}\n")
     for i in range(1, 100):
         if num < to_guess:
@@ -53,7 +53,7 @@ def show_history():
     history.title("Guess History")
     history.geometry("300x300")
     history.resizable(False, False)
-    f = open(download_dir+"/temp_history.txt", "r")
+    f = open(docu_dir+"/temp_history.txt", "r")
     label = Label(history, text="Guess History")
     label.pack()
     listbox = Listbox(history)
@@ -78,7 +78,7 @@ e1 = Entry(window)
 e1.pack()
 
 to_guess = random.randint(1, 1000)
-b1 = Button(window, text="Submit", bg="grey", command=game_start)
+b1 = Button(window, text="Guess", bg="grey", command=game_start)
 b1.pack(pady=10)
 
 l3 = Label(window, text="Tries:", font=game_title_font, fg="dark red")
@@ -88,5 +88,5 @@ b2 = Button(window, text="Show guesses", bg="grey", command=show_history)
 b2.pack(pady=0.5)
 
 window.mainloop()
-if (os.path.exists(download_dir+"/temp_history.txt")):
-    os.remove(download_dir+"/temp_history.txt")
+if (os.path.exists(docu_dir+"/temp_history.txt")):
+    os.remove(docu_dir+"/temp_history.txt")
